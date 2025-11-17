@@ -1,0 +1,28 @@
+@echo off
+chcp 65001 >nul
+REM Perceptual Loss를 적용한 학습 스크립트
+
+echo ========================================
+echo 인물사진 복원 모델 학습 (Perceptual Loss 적용)
+echo ========================================
+echo.
+
+python train.py ^
+    --dataroot ./portrait_retouch ^
+    --name portrait_retouch_reverse ^
+    --model pix2pix_with_perceptual ^
+    --direction AtoB ^
+    --batch_size 1 ^
+    --preprocess scale_width_and_crop ^
+    --load_size 1024 ^
+    --crop_size 1024 ^
+    --n_epochs 1000 ^
+    --n_epochs_decay 1000 ^
+    --lambda_L1 500.0 ^
+    --lambda_perceptual 10.0 ^
+    --use_perceptual ^
+    --gan_mode lsgan ^
+    --lr 0.0001
+
+pause
+

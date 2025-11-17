@@ -1,0 +1,6 @@
+REM 방법 1: Perceptual Loss 사용 (권장)
+python train.py --dataroot ./portrait_retouch --name portrait_retouch_reverse --model pix2pix_with_perceptual --direction AtoB --batch_size 1 --preprocess scale_width_and_crop --load_size 1024 --crop_size 1024 --n_epochs 1000 --n_epochs_decay 1000 --lambda_L1 100.0 --lambda_perceptual 10.0 --use_perceptual --gan_mode lsgan --lr 0.0001
+
+REM 방법 2: L1 Loss 감소 + LSGAN (Perceptual Loss 없이)
+python train.py --dataroot ./portrait_retouch --name portrait_retouch_reverse --model pix2pix --direction AtoB --batch_size 1 --preprocess scale_width_and_crop --load_size 1024 --crop_size 1024 --n_epochs 1000 --n_epochs_decay 1000 --lambda_L1 50.0 --gan_mode lsgan --n_layers_D 4 --lr 0.0001
+

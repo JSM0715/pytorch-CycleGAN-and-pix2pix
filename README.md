@@ -232,6 +232,23 @@ python test.py --dataroot ./datasets/facades/ --direction BtoA --model pix2pix -
 
 - See a list of currently available models at `./scripts/download_pix2pix_model.sh`
 
+### Web UI for Model Inference
+
+This repository includes a Web UI (`Web_ui/`) for easy model inference through a browser interface.
+
+**Quick Start:**
+```bash
+cd Web_ui
+start_all.bat  # Windows
+# or manually:
+# Terminal 1: cd Web_ui/src/backend && python app.py
+# Terminal 2: cd Web_ui && npm install && npm run dev
+```
+
+Then open `http://localhost:5173/` in your browser.
+
+For detailed instructions, see [Web_ui/README.md](Web_ui/README.md) and [Web_ui/START_WEBUI.md](Web_ui/START_WEBUI.md).
+
 ### Multi-GPU training
 
 To train a model on multiple GPUs, please use `torchrun --nproc_per_node=4 train.py ...` instead of `python train.py ...`. We also need to use synchronized batchnorm by setting `--norm sync_batch` (or `--norm sync_instance` for instance normgalization). The `--norm batch` is not compatible with DDP.

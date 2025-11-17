@@ -1,0 +1,17 @@
+# PyTorch and related packages
+# Note: Install PyTorch separately based on your system
+# For CUDA 12.1: pip install torch==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
+# For CPU only: pip install torch==2.4.0 torchvision==0.19.0
+
+# Core dependencies
+numpy>=1.24.3
+scikit-image
+opencv-python>=4.5.0
+dominate>=2.8.0
+Pillow>=10.0.0
+wandb>=0.16.0
+
+# Optional: for visualization (if needed)
+# visdom
+
+

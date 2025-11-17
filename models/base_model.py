@@ -95,6 +95,14 @@ class BaseModel(ABC):
                     load_filename = f"{load_suffix}_net_{name}.pth"
                     load_path = self.save_dir / load_filename
 
+                    # Check if checkpoint file exists
+                    if not load_path.exists():
+                        if opt.continue_train:
+                            print(f"Warning: Checkpoint {load_path} not found. Starting training from scratch.")
+                        else:
+                            print(f"Checkpoint {load_path} not found. Skipping loading.")
+                        continue
+
                     if isinstance(net, torch.nn.parallel.DistributedDataParallel):
                         net = net.module
                     print(f"loading the model from {load_path}")
@@ -216,7 +224,13 @@ class BaseModel(ABC):
             if module.__class__.__name__.startswith("InstanceNorm") and (key == "num_batches_tracked"):
                 state_dict.pop(".".join(keys))
         else:
-            self.__patch_instance_norm_state_dict(state_dict, getattr(module, key), keys, i + 1)
+            try:
+                next_module = getattr(module, key)
+                self.__patch_instance_norm_state_dict(state_dict, next_module, keys, i + 1)
+            except AttributeError:
+                # If the key doesn't exist in the module structure, skip patching for this key
+                # This can happen when state_dict keys don't match the current model structure
+                pass
 
     def load_networks(self, epoch):
         """Load all networks from the disk for DDP."""

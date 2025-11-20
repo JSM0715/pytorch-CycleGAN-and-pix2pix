@@ -1,18 +1,12 @@
-# Web Backend Dependencies
 Flask==3.0.0
 flask-cors==4.0.0
 Pillow==10.1.0
 
-# PyTorch and ML Dependencies
-# Note: PyTorch는 시스템에 따라 다르게 설치해야 합니다
-# GPU (CUDA 12.1) 사용 시:
-#   pip install torch==2.4.0 torchvision==0.19.0 --index-url https://download.pytorch.org/whl/cu121
-# CPU만 사용 시:
-#   pip install torch==2.4.0 torchvision==0.19.0
-# 또는 프로젝트 루트의 requirements.txt를 참고하세요
-
-# Core ML dependencies (PyTorch 설치 후)
-numpy>=1.24.3
-scikit-image
-opencv-python>=4.5.0
-dominate>=2.8.0
+# TODO: 실제 AI 모델 사용 시 아래 주석을 해제하고 설치하세요
+# gfpgan
+# basicsr
+# facexlib
+# realesrgan
+# codeformer
+# torch
+# torchvision
